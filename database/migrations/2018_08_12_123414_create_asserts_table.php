@@ -15,6 +15,10 @@ class CreateAssertsTable extends Migration
     {
         Schema::create('asserts', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('category');
+            $table->string('name');
+            $table->string('account_number');
+            $table->string('blance');
             $table->timestamps();
         });
     }

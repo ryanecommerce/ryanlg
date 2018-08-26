@@ -17,6 +17,8 @@ window.Vue = require('vue');
 import axios from "axios";
 
 Vue.component('app-list', require('./components/List.vue'));
+Vue.component('asserts-list', require('./components/List_assert.vue'));
+Vue.component('dschedules-list', require('./components/List_dschedule.vue'));
 
 const app = new Vue({
     el: '#app',

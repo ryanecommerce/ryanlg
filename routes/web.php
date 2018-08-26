@@ -15,3 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/asserts', function () {
+    return view('asserts');
+});
+
+Route::get('/dschedules', function () {
+    return view('dschedules');
+});

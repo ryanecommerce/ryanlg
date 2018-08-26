@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDscheduleTable extends Migration
+class CreateBucketlistsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateDscheduleTable extends Migration
      */
     public function up()
     {
-        Schema::create('dschedule', function (Blueprint $table) {
+        Schema::create('bucketlists', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->enum('status',['pending', 'processing','complete']);
+            $table->string('year');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateDscheduleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dschedule');
+        Schema::dropIfExists('bucketlist');
     }
 }
