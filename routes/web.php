@@ -12,13 +12,25 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('dschedules');
+})->middleware('auth');;
+
+Route::get('/shoplists', function () {
+    return view('shoplists');
+})->middleware('auth');
 
 Route::get('/asserts', function () {
     return view('asserts');
-});
+})->middleware('auth');
 
 Route::get('/dschedules', function () {
     return view('dschedules');
-});
+})->middleware('auth');
+
+Route::get('/bucketlists', function () {
+    return view('bucketlists');
+})->middleware('auth');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

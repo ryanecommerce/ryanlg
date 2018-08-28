@@ -1,9 +1,9 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-12 mx-auto">
+            <div class="col-lg-8 mx-auto">
                 <div class="card card-default">
-                    <div class="card-header">Assert list</div>
+                    <div class="card-header">Bucket list</div>
                     <div class="card-body">
                         <app-item
                                 v-for="item in items"
@@ -24,8 +24,8 @@
 </template>
 
 <script>
-    import appItem from "./Item_assert";
-    import appNewItem from "./NewItem_assert";
+    import appItem from "./Item_bucketlist";
+    import appNewItem from "./NewItem_bucketlist";
 
     export default {
         data() {
@@ -42,7 +42,7 @@
             axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 
             axios
-                .get("api/asserts")
+                .get("api/bucketlists")
                 .then(response => {
                     this.items = response.data;
                 })
@@ -53,7 +53,7 @@
         methods: {
             deleteItemHandler(id) {
                 axios
-                    .delete(`api/asserts/${id}`)
+                    .delete(`api/bucketlists/${id}`)
                     .then(response => {
                         console.log(response.data);
                     })
@@ -67,14 +67,13 @@
             createEventHandler(newItem) {
                 console.log(newItem);
                 axios
-                    .post("api/asserts", newItem)
+                    .post("api/bucketlists", newItem)
                     .then(response => {
                         console.log("stored");
                         this.items.push(response.data);
-                        newItem.category = "";
                         newItem.name = "";
-                        newItem.account_number = "";
-                        newItem.blance = "";
+                        newItem.status = "";
+                        newItem.year = "";
                     })
                     .catch(e => {
                         console.log(e);
@@ -82,7 +81,7 @@
             },
             updateItemHandler(item) {
                 axios
-                    .put(`api/asserts/${item.id}`, item)
+                    .put(`api/bucketlists/${item.id}`, item)
                     .then(response => {})
                     .catch(e => {
                         console.log(e);

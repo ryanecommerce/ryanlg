@@ -13982,7 +13982,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(14);
-module.exports = __webpack_require__(67);
+module.exports = __webpack_require__(76);
 
 
 /***/ }),
@@ -14014,6 +14014,7 @@ window.Vue = __webpack_require__(37);
 Vue.component('app-list', __webpack_require__(40));
 Vue.component('asserts-list', __webpack_require__(49));
 Vue.component('dschedules-list', __webpack_require__(58));
+Vue.component('bucketlists-list', __webpack_require__(67));
 
 var app = new Vue({
   el: '#app'
@@ -48666,7 +48667,7 @@ var render = function() {
     _c("div", { staticClass: "row justify-content-center" }, [
       _c("div", { staticClass: "col-lg-12 mx-auto" }, [
         _c("div", { staticClass: "card card-default" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("Shopping list")]),
+          _c("div", { staticClass: "card-header" }, [_vm._v("Assert list")]),
           _vm._v(" "),
           _c(
             "div",
@@ -49323,7 +49324,7 @@ var render = function() {
     _c("div", { staticClass: "row justify-content-center" }, [
       _c("div", { staticClass: "col-lg-8 mx-auto" }, [
         _c("div", { staticClass: "card card-default" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("Dschedule list")]),
+          _c("div", { staticClass: "card-header" }, [_vm._v("Bucket list")]),
           _vm._v(" "),
           _c(
             "div",
@@ -49365,6 +49366,774 @@ if (false) {
 
 /***/ }),
 /* 67 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(68)
+/* template */
+var __vue_template__ = __webpack_require__(75)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/List_bucketlist.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7f17aa62", Component.options)
+  } else {
+    hotAPI.reload("data-v-7f17aa62", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 68 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Item_bucketlist__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Item_bucketlist___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Item_bucketlist__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NewItem_bucketlist__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NewItem_bucketlist___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__NewItem_bucketlist__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            items: [],
+            errors: []
+        };
+    },
+
+    components: {
+        appItem: __WEBPACK_IMPORTED_MODULE_0__Item_bucketlist___default.a,
+        appNewItem: __WEBPACK_IMPORTED_MODULE_1__NewItem_bucketlist___default.a
+    },
+    created: function created() {
+        var _this = this;
+
+        axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+
+        axios.get("api/bucketlists").then(function (response) {
+            _this.items = response.data;
+        }).catch(function (e) {
+            console.log(e.response);
+        });
+    },
+
+    methods: {
+        deleteItemHandler: function deleteItemHandler(id) {
+            axios.delete("api/bucketlists/" + id).then(function (response) {
+                console.log(response.data);
+            }).catch(function (e) {
+                console.log(e.response);
+            });
+            this.items = this.items.filter(function (item) {
+                return item.id !== id;
+            });
+        },
+        createEventHandler: function createEventHandler(newItem) {
+            var _this2 = this;
+
+            console.log(newItem);
+            axios.post("api/bucketlists", newItem).then(function (response) {
+                console.log("stored");
+                _this2.items.push(response.data);
+                newItem.name = "";
+                newItem.status = "";
+                newItem.year = "";
+            }).catch(function (e) {
+                console.log(e);
+            });
+        },
+        updateItemHandler: function updateItemHandler(item) {
+            axios.put("api/bucketlists/" + item.id, item).then(function (response) {}).catch(function (e) {
+                console.log(e);
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 69 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(70)
+/* template */
+var __vue_template__ = __webpack_require__(71)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Item_bucketlist.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-17d3f166", Component.options)
+  } else {
+    hotAPI.reload("data-v-17d3f166", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 70 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        item: {}
+    },
+    data: function data() {
+        return {
+            isDisabled: true
+        };
+    },
+
+    methods: {
+        deleteItem: function deleteItem() {
+            this.$emit("deleteEvent", this.item.id);
+        },
+        updateItem: function updateItem() {
+            this.isDisabled = true;
+            this.$emit("updateEvent", this.item);
+        },
+        inputChanged: function inputChanged() {
+            if (this.item.name.length < 3) {
+                this.isDisabled = true;
+            } else {
+                this.isDisabled = false;
+            }
+        }
+    }
+});
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("form", { staticClass: "form-inline" }, [
+        _c("label", { staticClass: "sr-only", attrs: { for: "name" } }, [
+          _vm._v(_vm._s(_vm.item.name))
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.item.name,
+              expression: "item.name"
+            }
+          ],
+          staticClass: "form-control mb-2 mr-sm-2",
+          attrs: { type: "text", id: "name" },
+          domProps: { value: _vm.item.name },
+          on: {
+            change: function($event) {
+              _vm.inputChanged()
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.item, "name", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("label", { staticClass: "sr-only", attrs: { for: "name" } }, [
+          _vm._v(_vm._s(_vm.item.status))
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.item.status,
+              expression: "item.status"
+            }
+          ],
+          staticClass: "form-control mb-2 mr-sm-2",
+          attrs: { type: "text", id: "status" },
+          domProps: { value: _vm.item.status },
+          on: {
+            change: function($event) {
+              _vm.inputChanged()
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.item, "status", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("label", { staticClass: "sr-only", attrs: { for: "year" } }, [
+          _vm._v(_vm._s(_vm.item.year))
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.item.year,
+              expression: "item.year"
+            }
+          ],
+          staticClass: "form-control mb-2 mr-sm-2",
+          attrs: { type: "text", id: "year" },
+          domProps: { value: _vm.item.year },
+          on: {
+            change: function($event) {
+              _vm.inputChanged()
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.item, "year", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "btn-group",
+            attrs: { role: "group", "aria-label": "Buttons" }
+          },
+          [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary mb-2",
+                attrs: { type: "button", disabled: _vm.isDisabled },
+                on: {
+                  click: function($event) {
+                    _vm.updateItem()
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "fa fa-pencil fa-fw",
+                  attrs: { "aria-hidden": "true" }
+                }),
+                _vm._v(" Update")
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger mb-2",
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    _vm.deleteItem()
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "fa fa-remove fa-fw",
+                  attrs: { "aria-hidden": "true" }
+                }),
+                _vm._v(" Delete")
+              ]
+            )
+          ]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("hr", { staticClass: "d-block d-sm-none" })
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-17d3f166", module.exports)
+  }
+}
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(73)
+/* template */
+var __vue_template__ = __webpack_require__(74)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/NewItem_bucketlist.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-03cb162a", Component.options)
+  } else {
+    hotAPI.reload("data-v-03cb162a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 73 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            newItem: {
+                name: "",
+                status: "",
+                year: ""
+            }
+        };
+    },
+
+    methods: {
+        createItem: function createItem() {
+            this.$emit("createEvent", this.newItem);
+        }
+    },
+    computed: {
+        isDisabled: function isDisabled() {
+            if (this.newItem.name.length < 3) {
+                return true;
+            }
+            return false;
+        }
+    }
+});
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "justify-content-center row" }, [
+    _c("form", { staticClass: "form-inline" }, [
+      _c("label", { staticClass: "sr-only", attrs: { for: "name" } }, [
+        _vm._v(_vm._s(_vm.newItem.name))
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.newItem.name,
+            expression: "newItem.name"
+          }
+        ],
+        staticClass: "form-control mb-2 mr-sm-2",
+        attrs: { type: "text", id: "name", placeholder: "Name..." },
+        domProps: { value: _vm.newItem.name },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.newItem, "name", $event.target.value)
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("label", { staticClass: "sr-only", attrs: { for: "status" } }, [
+        _vm._v(_vm._s(_vm.newItem.status))
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.newItem.status,
+              expression: "newItem.status"
+            }
+          ],
+          staticClass: "form-control mb-2 mr-sm-2",
+          attrs: { id: "status" },
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.$set(
+                _vm.newItem,
+                "status",
+                $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+              )
+            }
+          }
+        },
+        [
+          _c("option", { attrs: { value: "" } }, [_vm._v("Status")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Pending" } }, [_vm._v("Pending")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Processing" } }, [
+            _vm._v("Processing")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Complete" } }, [_vm._v("Complete")])
+        ]
+      ),
+      _vm._v(" "),
+      _c("label", { staticClass: "sr-only", attrs: { for: "year" } }, [
+        _vm._v(_vm._s(_vm.newItem.year))
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.newItem.year,
+              expression: "newItem.year"
+            }
+          ],
+          staticClass: "form-control mb-2 mr-sm-2",
+          attrs: { id: "year" },
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.$set(
+                _vm.newItem,
+                "year",
+                $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+              )
+            }
+          }
+        },
+        [
+          _c("option", { attrs: { value: "" } }, [_vm._v("Year")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "2018-35" } }, [_vm._v("2018-35")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "2019-36" } }, [_vm._v("2019-36")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "2020-37" } }, [_vm._v("2020-37")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "2021-38" } }, [_vm._v("2021-38")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "2022-39" } }, [_vm._v("2022-39")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "2023-40" } }, [_vm._v("2023-40")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "2024-41" } }, [_vm._v("2024-41")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "2025-42" } }, [_vm._v("2025-42")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "2026-43" } }, [_vm._v("2026-43")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "2027-44" } }, [_vm._v("2027-44")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "2028-45" } }, [_vm._v("2028-45")])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "btn-group float-sm-right",
+          attrs: { role: "group", "aria-label": "Buttons" }
+        },
+        [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-success mb-2",
+              attrs: { type: "button", disabled: _vm.isDisabled },
+              on: {
+                click: function($event) {
+                  _vm.createItem()
+                }
+              }
+            },
+            [
+              _c("i", {
+                staticClass: "fa fa-plus-circle fa-fw",
+                attrs: { "aria-hidden": "true" }
+              }),
+              _vm._v("Add new item")
+            ]
+          )
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-03cb162a", module.exports)
+  }
+}
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-lg-8 mx-auto" }, [
+        _c("div", { staticClass: "card card-default" }, [
+          _c("div", { staticClass: "card-header" }, [_vm._v("Bucket list")]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "card-body" },
+            [
+              _vm._l(_vm.items, function(item) {
+                return _c("app-item", {
+                  key: item.id,
+                  attrs: { item: item },
+                  on: {
+                    deleteEvent: _vm.deleteItemHandler,
+                    updateEvent: _vm.updateItemHandler
+                  }
+                })
+              }),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _c("app-new-item", {
+                on: { createEvent: _vm.createEventHandler }
+              })
+            ],
+            2
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7f17aa62", module.exports)
+  }
+}
+
+/***/ }),
+/* 76 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

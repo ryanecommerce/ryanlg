@@ -9,6 +9,7 @@
                 <option value="fixed-deposit">Fixed deposit</option>
                 <option value="credit-card">Credit card</option>
                 <option value="loan">Loan</option>
+                <option value="etc">Loan</option>
             </select>
             <!-- <input v-model="newItem.category" type="text" class="form-control mb-2 mr-sm-2" id="category" placeholder="Category"> -->
 

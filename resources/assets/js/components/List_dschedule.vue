@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-8 mx-auto">
                 <div class="card card-default">
-                    <div class="card-header">Dschedule list</div>
+                    <div class="card-header">Bucket list</div>
                     <div class="card-body">
                         <app-item
                                 v-for="item in items"

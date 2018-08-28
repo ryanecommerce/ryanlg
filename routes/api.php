@@ -23,3 +23,5 @@ Route::resource('items', 'ItemController');
 Route::resource('asserts', 'AssertController');
 
 Route::resource('dschedules', 'DscheduleController');
+
+Route::resource('bucketlists', 'BucketlistController');
